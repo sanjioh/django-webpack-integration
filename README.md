@@ -10,6 +10,7 @@ $ source .venv/bin/activate
 $ pip install -r requirements.txt
 $ npm i
 $ npm run build
+$ ./manage.py migrate
 $ ./manage.py collectstatic -c --noinput -v3
 $ ./manage.py runserver
 ```
