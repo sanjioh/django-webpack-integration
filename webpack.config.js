@@ -20,7 +20,6 @@ module.exports = {
   output: {
     path: appDist,
     filename: '[name].js',
-    chunkFilename: '[name].non-entry-chunk.js',
   },
   optimization: {
     moduleIds: 'hashed',
