@@ -1,37 +1,46 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { StatsWriterPlugin } = require('webpack-stats-plugin');
 
-const appSrc = path.join(__dirname, 'app', 'js');
-const appDist = path.join(__dirname, 'app', 'static', 'app', 'js');
+const src = path.resolve(__dirname, 'frontend', 'src', 'js');
+const dist = path.resolve(__dirname, 'frontend', 'dist', 'frontend');
 
 module.exports = {
+  context: __dirname,
   mode: 'development',
   entry: {
-    home: path.join(appSrc, 'home.js'),
-    about: path.join(appSrc, 'about.js'),
+    home: path.resolve(src, 'home.js'),
+    about: path.resolve(src, 'about.js'),
+    list: path.resolve(src, 'list.js'),
+    detail: path.resolve(src, 'detail.js'),
+  },
+  output: {
+    path: dist,
+    filename: '[name].js',
   },
   devtool: 'inline-source-map',
   plugins: [
-    new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: ['**/*', '!.gitkeep'],
-      verbose: true,
+    new CleanWebpackPlugin({ verbose: true }),
+    new MiniCssExtractPlugin({ filename: '[name].css' }),
+    new StatsWriterPlugin({
+      filename: path.join('..', '..', 'assets.json'),
+      fields: ['entrypoints'],
     }),
   ],
-  output: {
-    path: appDist,
-    filename: '[name].js',
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+    ],
   },
   optimization: {
     moduleIds: 'hashed',
     runtimeChunk: 'single',
     splitChunks: {
-      cacheGroups: {
-        vendors: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          chunks: 'all',
-        },
-      },
+      chunks: 'all',
     },
   },
 };
