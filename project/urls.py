@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.urls import path
 
-from app import views
+from apps.app1 import views as app1views
+from apps.app2 import views as app2views
 
 urlpatterns = [
-    path('home/', views.HomeView.as_view()),
-    path('about/', views.AboutView.as_view()),
+    path('home/', app1views.HomeView.as_view()),
+    path('about/', app1views.AboutView.as_view()),
+    path('list/', app2views.ListView.as_view()),
+    path('detail/', app2views.DetailView.as_view()),
 ]
