@@ -19,3 +19,5 @@ $ ./manage.py runserver
 
 - `http://localhost:8000/home/`
 - `http://localhost:8000/about/`
+- `http://localhost:8000/list/`
+- `http://localhost:8000/detail/`
