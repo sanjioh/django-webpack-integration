@@ -17,12 +17,12 @@ module.exports = {
   },
   output: {
     path: dist,
-    filename: '[name].js',
+    filename: '[name].[contenthash].js',
   },
   devtool: 'inline-source-map',
   plugins: [
     new CleanWebpackPlugin({ verbose: true }),
-    new MiniCssExtractPlugin({ filename: '[name].css' }),
+    new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
     new StatsWriterPlugin({
       filename: path.join('..', '..', 'assets.json'),
       fields: ['entrypoints'],

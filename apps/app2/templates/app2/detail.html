@@ -1,14 +1,11 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <title>Detail</title>
-    <link href="{% static 'frontend/detail.css' %}" rel="stylesheet" />
+    {% include 'detail/css' %}
   </head>
   <body>
-    <script src="{% static 'frontend/runtime.js' %}"></script>
-    <script src="{% static 'frontend/vendors~about~detail~home~list.js' %}"></script>
-    <script src="{% static 'frontend/detail.js' %}"></script>
+    {% include 'detail/js' %}
   </body>
 </html>

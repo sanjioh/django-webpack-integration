@@ -54,17 +54,25 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'project.urls'
 
+TEMPLATE_LOADERS = [
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+    'bundles.BundleTemplateLoader',
+]
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
-        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+            ],
+            'loaders': TEMPLATE_LOADERS if DEBUG else [
+                ('django.template.loaders.cached.Loader', TEMPLATE_LOADERS),
             ],
         },
     },
