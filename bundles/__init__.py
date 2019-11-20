@@ -69,15 +69,17 @@ class BundleTemplateBuilder:
 
 
 class BundleTemplateLoader(Loader):
-    DEFAULT_ASSET_MAP_FILE = os.path.join('.', 'frontend', 'assets.json')
-    DEFAULT_ASSET_BASEPATH = 'frontend/'
+    asset_map_file = os.path.join('.', 'frontend', 'assets.json')
+    asset_basepath = 'frontend/'
+    asset_map_class = BundleAssetMap
+    template_builder_class = BundleTemplateBuilder
 
     def __init__(self, engine, options=None):
         options = options or {}
-        self._basepath = options.get('basepath', self.DEFAULT_ASSET_BASEPATH)
         self._asset_map_file = options.get(
-            'asset_map_file', self.DEFAULT_ASSET_MAP_FILE,
+            'asset_map_file', self.asset_map_file,
         )
+        self._basepath = options.get('basepath', self.asset_basepath)
         super().__init__(engine)
 
     def get_template_sources(self, template_name):
@@ -100,5 +102,5 @@ class BundleTemplateLoader(Loader):
         }[asset_type](entry, basepath=self._basepath)
 
     def _get_template_builder(self):
-        asset_map = BundleAssetMap.from_file(self._asset_map_file)
-        return BundleTemplateBuilder(asset_map)
+        asset_map = self.asset_map_class.from_file(self._asset_map_file)
+        return self.template_builder_class(asset_map)
