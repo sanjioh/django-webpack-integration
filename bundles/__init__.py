@@ -5,9 +5,6 @@ from django.template import Origin, TemplateDoesNotExist
 from django.template.loaders.base import Loader
 from django.utils.html import format_html_join
 
-DEFAULT_ASSET_MAP_FILE = os.path.join('.', 'frontend', 'assets.json')
-DEFAULT_ASSET_BASEPATH = 'frontend/'
-
 
 class BundleAssetMap:
     def __init__(self, asset_data):
@@ -72,11 +69,14 @@ class BundleTemplateBuilder:
 
 
 class BundleTemplateLoader(Loader):
+    DEFAULT_ASSET_MAP_FILE = os.path.join('.', 'frontend', 'assets.json')
+    DEFAULT_ASSET_BASEPATH = 'frontend/'
+
     def __init__(self, engine, options=None):
         options = options or {}
-        self._basepath = options.get('basepath', DEFAULT_ASSET_BASEPATH)
+        self._basepath = options.get('basepath', self.DEFAULT_ASSET_BASEPATH)
         self._asset_map_file = options.get(
-            'asset_map_file', DEFAULT_ASSET_MAP_FILE,
+            'asset_map_file', self.DEFAULT_ASSET_MAP_FILE,
         )
         super().__init__(engine)
 
