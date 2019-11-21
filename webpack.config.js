@@ -20,6 +20,10 @@ module.exports = {
     filename: '[name].[contenthash].js',
   },
   devtool: 'inline-source-map',
+  devServer: {
+    writeToDisk: true,
+    proxy: { '/': 'http://localhost:8000' },
+  },
   plugins: [
     new CleanWebpackPlugin({ verbose: true }),
     new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
