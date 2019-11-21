@@ -69,8 +69,8 @@ class BundleTemplateBuilder:
 
 
 class BundleTemplateLoader(Loader):
-    asset_map_file = os.path.join('.', 'frontend', 'assets.json')
-    asset_basepath = 'frontend/'
+    asset_map_file = os.path.join('.', 'ui', 'assets.json')
+    asset_basepath = 'ui/'
     asset_map_class = BundleAssetMap
     template_builder_class = BundleTemplateBuilder
     sep = '/'

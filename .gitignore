@@ -211,7 +211,7 @@ public/
 .dynamodb/
 
 # Asset map file
-/frontend/assets.json
+/ui/assets.json
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
