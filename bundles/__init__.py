@@ -73,6 +73,7 @@ class BundleTemplateLoader(Loader):
     asset_basepath = 'frontend/'
     asset_map_class = BundleAssetMap
     template_builder_class = BundleTemplateBuilder
+    sep = '/'
 
     def __init__(self, engine, options=None):
         options = options or {}
@@ -94,12 +95,15 @@ class BundleTemplateLoader(Loader):
             raise TemplateDoesNotExist(origin) from e
 
     def _get_contents(self, origin):
-        entry, asset_type = origin.name.rsplit('/', 1)
+        entry, asset_type = self._parse_template_name(origin.name)
         builder = self._get_template_builder()
         return {
             'js': builder.get_js_template,
             'css': builder.get_css_template,
         }[asset_type](entry, basepath=self._basepath)
+
+    def _parse_template_name(self, template_name):
+        return template_name.rstrip().rstrip(self.sep).rsplit(self.sep, 2)[-2:]
 
     def _get_template_builder(self):
         asset_map = self.asset_map_class.from_file(self._asset_map_file)
