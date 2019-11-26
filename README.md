@@ -9,15 +9,14 @@ $ python3 -m venv .venv
 $ source .venv/bin/activate
 $ pip install -r requirements.txt
 $ npm i
-$ npm run build
 $ ./manage.py migrate
-$ ./manage.py collectstatic -c --noinput -v3
 $ ./manage.py runserver
+$ npm run serve
 ```
 
 ## URLs
 
-- `http://localhost:8000/home/`
-- `http://localhost:8000/about/`
-- `http://localhost:8000/list/`
-- `http://localhost:8000/detail/`
+- `http://localhost:8080/home/`
+- `http://localhost:8080/about/`
+- `http://localhost:8080/list/`
+- `http://localhost:8080/detail/`
