@@ -1,11 +1,11 @@
 import _ from 'lodash';
-import '../css/style2.css';
+import '@/css/style2.css';
 
 function component() {
   const element = document.createElement('div');
 
   // Lodash, now imported by this script
-  element.innerHTML = _.join(['Hello', 'from', 'Detail'], ' ');
+  element.innerHTML = _.join(['Hello', 'from', 'List'], ' ');
   element.classList.add('hello');
 
   return element;
