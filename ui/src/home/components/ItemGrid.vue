@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import ItemCard from '@/home/components/ItemCard.vue';
+import ItemCard from './ItemCard.vue';
 
 export default {
   data() {

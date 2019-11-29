@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import ItemGrid from '@/home/components/ItemGrid.vue';
+import ItemGrid from './components/ItemGrid.vue';
 
 export default {
   components: {
@@ -12,6 +12,6 @@ export default {
 };
 </script>
 
-<style lang="sass">
-@import '@/scss/style.scss';
+<style lang="scss">
+@import '../scss/style.scss';
 </style>
