@@ -1,0 +1,14 @@
+{% extends 'common/base.html' %}
+
+{% block head_tags %}
+<title><%= htmlWebpackPlugin.options.title %></title>
+<%= htmlWebpackPlugin.files.css.map(
+  css => `<link href="${css}" rel="stylesheet">`).join('\n')
+%>
+{% endblock %}
+
+{% block body_tags %}
+<%= htmlWebpackPlugin.files.js.map(
+  js => `<script src="${js}"></script>`).join('\n')
+%>
+{% endblock %}
