@@ -26,7 +26,7 @@ export default {
     return { imgUrl: placeholder };
   },
   props: ['item'],
-  beforeMount() {
+  created() {
     axios.get(this.item.url).then(response => {
       if (response.data.sprites.front_default) {
         this.imgUrl = response.data.sprites.front_default;
