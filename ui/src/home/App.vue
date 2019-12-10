@@ -1,13 +1,19 @@
 <template>
-  <ItemGrid></ItemGrid>
+  <!-- Change this div into a Fragment once Vue 3 is released. -->
+  <div>
+    <Header />
+    <Content />
+  </div>
 </template>
 
 <script>
-import ItemGrid from '@/home/components/ItemGrid.vue';
+import Header from '@/home/components/Header.vue';
+import Content from '@/home/components/Content.vue';
 
 export default {
   components: {
-    ItemGrid,
+    Header,
+    Content,
   },
 };
 </script>

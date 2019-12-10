@@ -1,36 +1,16 @@
 <template>
   <div class="column is-4">
     <div class="card">
-      <div class="card-image">
-        <figure class="image is-4by3">
-          <img
-            src="https://bulma.io/images/placeholders/1280x960.png"
-            alt="Placeholder image"
-          />
-        </figure>
-      </div>
       <div class="card-content">
         <div class="media">
           <div class="media-left">
-            <figure class="image is-48x48">
-              <img
-                src="https://bulma.io/images/placeholders/96x96.png"
-                alt="Placeholder image"
-              />
+            <figure class="image">
+              <img :src="imgUrl" alt="Pokémon image" />
             </figure>
           </div>
           <div class="media-content">
-            <p class="title is-4">John Smith</p>
-            <p class="subtitle is-6">Hello World from {{ num }}!</p>
+            <p class="title is-4">{{ item.name }}</p>
           </div>
-        </div>
-
-        <div class="content">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec
-          iaculis mauris. <a>@bulmaio</a>. <a href="#">#css</a>
-          <a href="#">#responsive</a>
-          <br />
-          <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
         </div>
       </div>
     </div>
@@ -38,7 +18,19 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
-  props: ['num'],
+  data() {
+    return { imgUrl: 'https://bulma.io/images/placeholders/96x96.png' };
+  },
+  props: ['item'],
+  beforeMount() {
+    axios.get(this.item.url).then(response => {
+      if (response.data.sprites.front_default) {
+        this.imgUrl = response.data.sprites.front_default;
+      }
+    });
+  },
 };
 </script>

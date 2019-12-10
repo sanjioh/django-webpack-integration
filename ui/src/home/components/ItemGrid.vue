@@ -1,18 +1,41 @@
 <template>
   <div class="columns is-multiline">
-    <ItemCard v-for="n in nums" v-bind:num="n" v-bind:key="n"></ItemCard>
+    <slot v-for="i in items" :item="i" />
+    <ItemGridTrigger @triggerIntersected="load" />
   </div>
 </template>
 
 <script>
-import ItemCard from '@/home/components/ItemCard.vue';
+import axios from 'axios';
+import ItemGridTrigger from '@/home/components/ItemGridTrigger.vue';
 
 export default {
-  data() {
-    return { nums: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13] };
-  },
   components: {
-    ItemCard,
+    ItemGridTrigger,
+  },
+  data() {
+    return {
+      items: [],
+      next: 'https://pokeapi.co/api/v2/pokemon/',
+      loading: false,
+    };
+  },
+  methods: {
+    load() {
+      if (!this.loading && this.next) {
+        this.loading = true;
+        axios
+          .get(this.next)
+          .then(response => {
+            this.next = response.data.next;
+            this.items.push(...response.data.results);
+            this.loading = false;
+          })
+          .catch(err => {
+            this.loading = false;
+          });
+      }
+    },
   },
 };
 </script>
