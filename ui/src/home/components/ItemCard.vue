@@ -19,10 +19,11 @@
 
 <script>
 import axios from 'axios';
+import placeholder from '../img/96x96.png';
 
 export default {
   data() {
-    return { imgUrl: 'https://bulma.io/images/placeholders/96x96.png' };
+    return { imgUrl: placeholder };
   },
   props: ['item'],
   beforeMount() {
